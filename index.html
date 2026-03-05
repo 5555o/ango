@@ -1,104 +1,26 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<title>ガチャゲーム</title>
-
-<style>
-body{
-    font-family: sans-serif;
-    background: linear-gradient(135deg,#1e3c72,#2a5298);
-    color:white;
-    text-align:center;
-    padding-top:80px;
-}
-
-h1{
-    font-size:40px;
-}
-
-#gachaButton{
-    padding:20px 40px;
-    font-size:24px;
-    border:none;
-    border-radius:10px;
-    background:gold;
-    color:black;
-    cursor:pointer;
-    transition:0.2s;
-}
-
-#gachaButton:hover{
-    transform:scale(1.1);
-}
-
-#result{
-    margin-top:40px;
-    font-size:30px;
-}
-
-.card{
-    margin-top:20px;
-    padding:20px;
-    border-radius:15px;
-    display:inline-block;
-    font-size:26px;
-}
-
-.N {background:#888;}
-.R {background:#2ecc71;}
-.SR {background:#3498db;}
-.SSR {background:#9b59b6;}
-.UR {background:gold;color:black;}
-</style>
-</head>
-
-<body>
-
-<h1>🎰 ガチャゲーム</h1>
-
-<button id="gachaButton">ガチャを引く！</button>
-
-<div id="result"></div>
-
 <script>
+function gacha() {
 
-const characters = [
-{ name:"スライム", rarity:"N", rate:50 },
-{ name:"ゴブリン", rarity:"N", rate:30 },
-{ name:"剣士", rarity:"R", rate:10 },
-{ name:"魔法使い", rarity:"SR", rate:6 },
-{ name:"ドラゴン", rarity:"SSR", rate:3 },
-{ name:"神の戦士", rarity:"UR", rate:1 }
-];
+    const rand = Math.random() * 100;
+    let result = "";
 
-function gacha(){
+    if (rand < 1) {
+        result = "UR ⭐ 神の戦士";
+    }
+    else if (rand < 4) {
+        result = "SSR ⭐ ドラゴン";
+    }
+    else if (rand < 10) {
+        result = "SR ⭐ 魔法使い";
+    }
+    else if (rand < 20) {
+        result = "R ⭐ 剣士";
+    }
+    else {
+        result = "N ⭐ スライム";
+    }
 
-let rand = Math.random()*100;
-let sum = 0;
-
-for(let c of characters){
-
-sum += c.rate;
-
-if(rand <= sum){
-
-document.getElementById("result").innerHTML =
-`<div class="card ${c.rarity}">
-${c.rarity} ★<br>${c.name}
-</div>`;
-
-break;
+    document.getElementById("result").textContent = result;
 
 }
-
-}
-
-}
-
-document.getElementById("gachaButton").addEventListener("click",gacha);
-
 </script>
-
-</body>
-</html>
